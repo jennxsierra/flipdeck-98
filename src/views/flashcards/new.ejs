@@ -1,0 +1,15 @@
+<%- include('../partials/meta') %>
+<%- include('../partials/header') %>
+
+<h1>Add New Card</h1>
+<form method="POST" action="/flashcards">
+  <label for="prompt">Prompt:</label>
+  <input type="text" id="prompt" name="prompt" required />
+  <label for="answer">Answer:</label>
+  <input type="text" id="answer" name="answer" required />
+  <button type="submit">Add Card</button>
+</form>
+
+<a href="/">Back to Home</a>
+
+<%- include('../partials/footer') %>

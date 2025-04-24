@@ -1,11 +1,44 @@
-<%- include('partials/header') %>
+<%- include('partials/meta') %> <%- include('partials/header') %>
+
 <h1>Flashcards</h1>
-<ul>
+
+<!-- Flip Deck -->
+<div class="flip-deck">
+  <div class="card" id="flip-card">
+    <p id="card-content">
+      <%= flashcards[0]?.prompt || "No cards available" %>
+    </p>
+  </div>
+  <div class="navigation">
+    <button id="prev-card">Previous</button>
+    <span id="card-counter">Card 1 of <%= flashcards.length %></span>
+    <button id="next-card">Next</button>
+  </div>
+  <button id="flip-card-button">Flip</button>
+</div>
+
+<!-- Add New Card Button -->
+<a href="/flashcards/new" class="add-card-button">Add New Card</a>
+
+<!-- Deck List -->
+<ul class="deck-list" id="deck-list">
   <% flashcards.forEach(flashcard => { %>
-  <li>
-    <a href="/flashcards/<%= flashcard.id %>"><%= flashcard.question %></a>
+  <li class="card" data-id="<%= flashcard.id %>">
+    <p>Prompt: <%= flashcard.prompt %></p>
+    <p>Answer: <%= flashcard.answer %></p>
+    <a href="/flashcards/<%= flashcard.id %>/edit">Edit</a>
+    <form method="POST" action="/flashcards/<%= flashcard.id %>?_method=DELETE">
+      <button
+        type="submit"
+        class="delete-card-button"
+        data-id="<%= flashcard.id %>"
+      >
+        Delete
+      </button>
+    </form>
   </li>
   <% }) %>
 </ul>
-<a href="/flashcards/new">Create a new flashcard</a>
+
+<script src="/scripts/flipdeck.js"></script>
 <%- include('partials/footer') %>

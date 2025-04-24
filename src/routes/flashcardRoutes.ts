@@ -1,18 +1,22 @@
 import express from "express";
 import {
-  listFlashcards,
-  showFlashcard,
+  renderHomepage,
+  getFlashcardsAsJson,
+  showAddFlashcardForm,
   createFlashcardHandler,
+  showEditFlashcardForm,
   updateFlashcardHandler,
   deleteFlashcardHandler,
 } from "../controllers/flashcardController.js";
 
 const router = express.Router();
 
-router.get("/", listFlashcards);
-router.get("/flashcards/:id", showFlashcard);
+router.get("/", renderHomepage);
+router.get("/api/flashcards", getFlashcardsAsJson);
+router.get("/flashcards/new", showAddFlashcardForm);
 router.post("/flashcards", createFlashcardHandler);
-router.post("/flashcards/:id", updateFlashcardHandler);
-router.post("/flashcards/:id/delete", deleteFlashcardHandler);
+router.get("/flashcards/:id/edit", showEditFlashcardForm);
+router.patch("/flashcards/:id", updateFlashcardHandler);
+router.delete("/flashcards/:id/delete", deleteFlashcardHandler);
 
 export default router;
