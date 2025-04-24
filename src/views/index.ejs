@@ -1,0 +1,11 @@
+<%- include('partials/header') %>
+<h1>Flashcards</h1>
+<ul>
+  <% flashcards.forEach(flashcard => { %>
+  <li>
+    <a href="/flashcards/<%= flashcard.id %>"><%= flashcard.question %></a>
+  </li>
+  <% }) %>
+</ul>
+<a href="/flashcards/new">Create a new flashcard</a>
+<%- include('partials/footer') %>

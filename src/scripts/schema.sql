@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS flashcards;
+
+CREATE TABLE flashcards (
+    id SERIAL PRIMARY KEY,
+    prompt TEXT NOT NULL,
+    answer TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE flashcards TO flipdeck_user;
