@@ -1,10 +1,18 @@
 /* -------------------- Global Styles -------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  font-family: "Noto Sans", sans-serif;
+  box-sizing: border-box;
+}
+
 body,
 html {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  box-sizing: border-box;
 }
 
 a {
@@ -15,6 +23,14 @@ a {
 ul {
   list-style: none;
   padding: 0;
+}
+
+.page-container {
+  flex: 1;
+}
+
+h2 {
+  font-weight: 600;
 }
 
 /* -------------------- Navigation Bar -------------------- */
@@ -316,23 +332,113 @@ ul {
   cursor: pointer;
 }
 
+/* -------------------- Add and Edit Forms -------------------- */
+.floating-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0fr 2fr;
+  gap: 1rem;
+  height: 600px;
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.floating-card .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.floating-card .form-group label {
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.floating-card .form-group input,
+.floating-card .form-group textarea {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.floating-card textarea {
+  resize: both;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 5rem;
+}
+
+.submit-btn,
+.cancel-btn {
+  width: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn {
+  background-color: #00509e;
+  color: white;
+}
+
+.submit-btn:hover {
+  background-color: #003166;
+}
+
+.cancel-btn {
+  background-color: #cccccc;
+  color: #000;
+}
+.cancel-btn:hover {
+  background-color: #9f9f9f;
+}
+
 /* ------------------ Footer Section ------------------ */
 .footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   padding: 1rem;
   background-color: #00509e;
 }
 
-.footer p {
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-content p {
   margin: 0;
   font-weight: 600;
   font-size: 1rem;
   color: #fbfbfb;
 }
 
-.footer a {
+.footer-content a {
   color: #000;
   text-decoration: none;
 }
