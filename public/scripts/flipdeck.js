@@ -17,22 +17,28 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Error fetching flashcards:", error);
     cardContent.textContent = "Failed to load flashcards.";
-    cardCounter.textContent = "Card 0 of 0";
+    cardCounter.textContent = "0 of 0";
     return;
   }
 
   // Update the card display
   const updateCardDisplay = () => {
     const currentCard = flashcards[currentCardIndex];
-    cardContent.textContent = isFront ? currentCard.prompt : currentCard.answer;
-    cardCounter.textContent = `Card ${currentCardIndex + 1} of ${
+    if (isFront) {
+      cardContent.textContent = currentCard.prompt; // Front side
+    } else {
+      const cardAnswer = document.getElementById("card-answer");
+      cardAnswer.textContent = currentCard.answer; // Back side
+    }
+    cardCounter.textContent = `${currentCardIndex + 1} of ${
       flashcards.length
     }`;
   };
 
   // Flip the card when clicked
   flipCard.addEventListener("click", () => {
-    isFront = !isFront;
+    flipCard.classList.toggle("flipped");
+    isFront = !isFront; // Toggle the side being displayed
     updateCardDisplay();
   });
 
@@ -56,6 +62,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateCardDisplay();
   } else {
     cardContent.textContent = "No cards available";
-    cardCounter.textContent = "Card 0 of 0";
+    cardCounter.textContent = "0 of 0";
   }
 });

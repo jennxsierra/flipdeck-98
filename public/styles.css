@@ -1,52 +1,338 @@
-body {
+/* -------------------- Global Styles -------------------- */
+body,
+html {
+  margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
+  box-sizing: border-box;
 }
 
-.flip-deck {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.flip-deck .card {
-  border: 1px solid #ccc;
-  padding: 20px;
-  margin: 10px auto;
-  width: 300px;
-  background-color: #f9f9f9;
-}
-
-.navigation {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.add-card-button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+a {
   text-decoration: none;
-  text-align: center;
+  color: inherit;
 }
 
-.deck-list {
+ul {
   list-style: none;
   padding: 0;
 }
 
-.deck-list .card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px 0;
+/* -------------------- Navigation Bar -------------------- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: #f4f4f4;
+  border-bottom: 2px solid #ccc;
+}
+
+.navbar .logo img {
+  height: 50px;
+}
+
+.navbar .welcome-message {
+  font-size: 1.5rem;
+  color: #003166;
+}
+
+/* ------------------- Flipdeck Section ------------------- */
+.flipdeck-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.flip-deck {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.flipdeck-card {
+  perspective: 1000px;
+  width: 600px;
+  height: 400px;
+  margin-bottom: 1rem;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.flipdeck-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 1.8rem;
+  background-color: #b0c6db;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  word-wrap: break-word;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+#card-content {
+  margin: 20px;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+  margin: 0 auto;
+}
+
+#prev-card,
+#next-card {
+  background-color: #00509e;
+  color: white;
+  border: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#prev-card:hover,
+#next-card:hover {
+  background-color: #003166;
+}
+
+/* ------------------- Bottom Section ------------------- */
+.bottom-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.deck-list-container,
+.right-sidebar-container {
+  border: 3px solid #ccc;
+  border-radius: 2px;
+  padding: 1rem;
   background-color: #f9f9f9;
 }
 
-.deck-list .card a {
-  margin-right: 10px;
+.deck-list-container h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
-button {
+/* --------------- Deck List Section --------------- */
+.deck-list-card {
+  min-height: 150px;
+  height: auto;
+  font-size: 1rem;;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr 20px 1fr;
+  gap: 0;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 0.5rem 0.5rem 2rem 1rem;
+  margin-bottom: 1rem;
+  background-color: #b0c6db;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.deck-list-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Top row for action buttons */
+.deck-list-card .actions {
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.deck-list-card .actions button {
+  background: none;
+  border: none;
   cursor: pointer;
+  padding: 5px;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.deck-list-card .actions .edit-btn {
+  color: #2e2e2e;
+}
+
+.deck-list-card .actions .delete-btn {
+  color: #d9534f;
+}
+
+.deck-list-card .actions .edit-btn:hover {
+  color: #5b7ade;
+}
+
+.deck-list-card .actions .delete-btn:hover {
+  color: #bb0600;
+}
+
+.deck-list-card .actions i {
+  pointer-events: none;
+}
+
+/* Prompt column */
+.deck-list-card .prompt {
+  grid-column: 1 / 2;
+  text-align: left;
+  align-self: center;
+}
+
+/* Divider column */
+.deck-list-card .divider {
+  grid-column: 2 / 3;
+  background-color: #00316685;
+  width: 1px;
+  height: 100%;
+}
+
+/* Answer column */
+.deck-list-card .answer {
+  grid-column: 3 / 4;
+  text-align: left;
+  align-self: center;
+}
+
+/* ------------------ Right Sidebar Section --------------- */
+.right-sidebar-container h2 {
+  margin-bottom: 0;
+}
+
+.right-sidebar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-flashcard-btn {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+  background-color: #00509e;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-flashcard-btn:hover {
+  background-color: #003166;
+}
+
+/* Search and Filter Section */
+.search-sort-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #eeeeee;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-form input {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius:3px;
+}
+
+.search-form button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #00509e;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-form button:hover {
+  background-color: #003166;
+}
+
+.sort-options {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-options label {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.sort-options select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* ------------------ Footer Section ------------------ */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #00509e;
+}
+
+.footer p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fbfbfb;
+}
+
+.footer a {
+  color: #000;
+  text-decoration: none;
 }

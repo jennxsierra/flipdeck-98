@@ -1,51 +1,123 @@
 <%- include('partials/meta') %>
 <%- include('partials/header') %>
 
-<!-- Flash Messages -->
-<% if (query.alert === 'success') { %>
-  <div class="alert alert-success">Card deleted successfully.</div>
-<% } else if (query.alert === 'error') { %>
-  <div class="alert alert-error">Failed to delete the card.</div>
-<% } %>
+  <!-- FlipDeck Section -->
+  <section class="flipdeck-section">
+    <div class="flip-deck">
 
-<h1>Flashcards</h1>
+      <!-- Flashcard -->
+      <div class="flipdeck-card" id="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <p id="card-content">
+              <%= flashcards[0]?.prompt || "No cards available" %>
+            </p>
+          </div>
+          <div class="flip-card-back">
+            <p id="card-answer">
+              <%= flashcards[0]?.answer || "No answer available" %>
+            </p>
+          </div>
+        </div>
+      </div>
 
-<!-- Flip Deck -->
-<div class="flip-deck">
-  <div class="card" id="flip-card">
-    <p id="card-content">
-      <%= flashcards[0]?.prompt || "No cards available" %>
-    </p>
-  </div>
-  <div class="navigation">
-    <button id="prev-card">Previous</button>
-    <span id="card-counter">Card 1 of <%= flashcards.length %></span>
-    <button id="next-card">Next</button>
-  </div>
+      <!-- Navigation -->
+      <div class="navigation">
+        <button id="prev-card">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <span id="card-counter">1 of <%= flashcards.length %></span>
+        <button id="next-card">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flash Messages -->
+  <% if (query.alert === 'success') { %>
+    <div class="alert alert-success">
+      <div class="close-button">
+        <a href="/" class="close-btn">
+          <i class="fas fa-times"></i>
+        </a>
+      </div>
+      Card deleted successfully!
+    </div>
+  <% } else if (query.alert === 'error') { %>
+    <div class="alert alert-error">
+      <div class="close-button">
+        <a href="/" class="close-btn">
+          <i class="fas fa-times"></i>
+        </a>
+      </div>
+      Failed to delete the card.
+    </div>
+  <% } %>
+
+  <!-- Bottom Section -->
+  <section class="bottom-section">
+    <!-- Deck List -->
+    <div class="deck-list-container">
+      <h2>Your Deck</h2>
+      <ul class="deck-list" id="deck-list">
+        <% flashcards.forEach(flashcard => { %>
+        <li class="deck-list-card" data-id="<%= flashcard.id %>">
+          <!-- Top row for action buttons -->
+          <div class="actions">
+            <form method="GET" action="/flashcards/<%= flashcard.id %>/edit" class="edit-form">
+              <button type="submit" class="edit-btn">
+                <i class="fas fa-edit"></i>
+              </button>
+            </form>
+            <form method="POST" action="/flashcards/<%= flashcard.id %>?_method=DELETE" class="delete-form">
+              <button type="submit" class="delete-btn">
+                <i class="fas fa-trash"></i>
+              </button>
+            </form>
+          </div>
+          <!-- Three columns below -->
+          <p class="prompt"><%= flashcard.prompt %></p>
+          <div class="divider"></div>
+          <p class="answer"><%= flashcard.answer %></p>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <!-- Right Sidebar -->
+     <div class="right-sidebar-container">
+      <!-- Add Flashcard Button -->
+      <div class="add-flashcard-container">
+        <form method="GET" action="/flashcards/new" class="add-flashcard-form">
+          <button type="submit" class="add-flashcard-btn">
+            <i class="fas fa-plus"></i> Add Flashcard
+          </button>
+        </form>
+      </div>
+
+      <!-- Search and Sort -->
+      <h2>Search & Sort</h2>
+      <div class="search-sort-container">
+        <div class="search-options">
+          <form class="search-form">
+            <input type="text" placeholder="Search flashcards..." />
+            <button type="submit">Search</button>
+          </form>
+        </div>
+
+        <div class="sort-options">
+          <label for="sort-dropdown">Sort by:</label>
+          <select id="sort-dropdown" name="sort">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
+        </div>
+      </div>
+     </div>
+
+  </section>
 </div>
-
-<!-- Add New Card Button -->
-<a href="/flashcards/new" class="add-card-button">Add New Card</a>
-
-<!-- Deck List -->
-<ul class="deck-list" id="deck-list">
-  <% flashcards.forEach(flashcard => { %>
-  <li class="card" data-id="<%= flashcard.id %>">
-    <p>Prompt: <%= flashcard.prompt %></p>
-    <p>Answer: <%= flashcard.answer %></p>
-    <a href="/flashcards/<%= flashcard.id %>/edit">Edit</a>
-    <form method="POST" action="/flashcards/<%= flashcard.id %>?_method=DELETE">
-      <button
-        type="submit"
-        class="delete-card-button"
-        data-id="<%= flashcard.id %>"
-      >
-        Delete
-      </button>
-    </form>
-  </li>
-  <% }) %>
-</ul>
 
 <script src="/scripts/flipdeck.js"></script>
 <%- include('partials/footer') %>
