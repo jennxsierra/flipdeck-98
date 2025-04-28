@@ -1,4 +1,3 @@
-// filepath: /home/jsierra/projects/flipdeck-98/public/scripts/flipdeck.js
 document.addEventListener("DOMContentLoaded", async () => {
   let flashcards = [];
   let currentCardIndex = 0;
@@ -6,10 +5,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const cardContent = document.getElementById("card-content");
   const cardCounter = document.getElementById("card-counter");
-  const flipCardButton = document.getElementById("flip-card-button");
+  const flipCard = document.getElementById("flip-card");
   const prevCardButton = document.getElementById("prev-card");
   const nextCardButton = document.getElementById("next-card");
-  const deckList = document.getElementById("deck-list");
 
   // Fetch flashcards from the server
   try {
@@ -32,8 +30,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }`;
   };
 
-  // Flip the card
-  flipCardButton.addEventListener("click", () => {
+  // Flip the card when clicked
+  flipCard.addEventListener("click", () => {
     isFront = !isFront;
     updateCardDisplay();
   });
@@ -51,30 +49,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     currentCardIndex = (currentCardIndex + 1) % flashcards.length;
     isFront = true; // Reset to front side
     updateCardDisplay();
-  });
-
-  // Handle card deletion
-  deckList.addEventListener("click", async (event) => {
-    if (event.target.classList.contains("delete-card-button")) {
-      const cardId = event.target.dataset.id;
-      const confirmed = confirm("Are you sure you want to delete this card?");
-      if (confirmed) {
-        try {
-          const response = await fetch(`/flashcards/${cardId}/delete`, {
-            method: "POST",
-          });
-          if (response.ok) {
-            event.target.closest(".card").remove();
-            alert("Card deleted successfully.");
-          } else {
-            alert("Failed to delete the card.");
-          }
-        } catch (error) {
-          console.error("Error deleting card:", error);
-          alert("An error occurred while deleting the card.");
-        }
-      }
-    }
   });
 
   // Initialize the card display

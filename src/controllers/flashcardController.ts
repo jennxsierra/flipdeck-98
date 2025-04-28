@@ -7,10 +7,10 @@ import {
   deleteFlashcard,
 } from "../models/flashcardModel.js";
 
-export const renderHomepage = async (_req: Request, res: Response) => {
+export const renderHomepage = async (req: Request, res: Response) => {
   try {
     const flashcards = await getAllFlashcards();
-    res.render("index", { flashcards });
+    res.render("index", { flashcards, query: req.query }); // Pass req.query to the template
   } catch (error) {
     res.status(500).render("error", { message: "Failed to load homepage." });
   }
@@ -62,8 +62,9 @@ export const updateFlashcardHandler = async (req: Request, res: Response) => {
 export const deleteFlashcardHandler = async (req: Request, res: Response) => {
   try {
     await deleteFlashcard(Number(req.params.id));
-    res.status(200).send("Card deleted successfully");
+    res.redirect("/?alert=success"); // Redirect with a success alert
   } catch (error) {
-    res.status(500).send("Failed to delete card");
+    console.error("Error deleting flashcard:", error);
+    res.redirect("/?alert=error"); // Redirect with an error alert
   }
 };

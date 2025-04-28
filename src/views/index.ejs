@@ -1,4 +1,12 @@
-<%- include('partials/meta') %> <%- include('partials/header') %>
+<%- include('partials/meta') %>
+<%- include('partials/header') %>
+
+<!-- Flash Messages -->
+<% if (query.alert === 'success') { %>
+  <div class="alert alert-success">Card deleted successfully.</div>
+<% } else if (query.alert === 'error') { %>
+  <div class="alert alert-error">Failed to delete the card.</div>
+<% } %>
 
 <h1>Flashcards</h1>
 
@@ -14,7 +22,6 @@
     <span id="card-counter">Card 1 of <%= flashcards.length %></span>
     <button id="next-card">Next</button>
   </div>
-  <button id="flip-card-button">Flip</button>
 </div>
 
 <!-- Add New Card Button -->

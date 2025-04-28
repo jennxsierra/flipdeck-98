@@ -17,6 +17,6 @@ router.get("/flashcards/new", showAddFlashcardForm);
 router.post("/flashcards", createFlashcardHandler);
 router.get("/flashcards/:id/edit", showEditFlashcardForm);
 router.patch("/flashcards/:id", updateFlashcardHandler);
-router.delete("/flashcards/:id/delete", deleteFlashcardHandler);
+router.delete("/flashcards/:id", deleteFlashcardHandler);
 
 export default router;
