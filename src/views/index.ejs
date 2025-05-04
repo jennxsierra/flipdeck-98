@@ -1,57 +1,30 @@
 <%- include('partials/meta') %>
 <%- include('partials/header') %>
 
-  <!-- FlipDeck Section -->
-  <section class="flipdeck-section">
-    <div class="flip-deck">
-
-      <!-- Flashcard -->
-      <div class="flipdeck-card" id="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <p id="card-content">
-              <%= flashcards[0]?.prompt || "No cards available" %>
-            </p>
-          </div>
-          <div class="flip-card-back">
-            <p id="card-answer">
-              <%= flashcards[0]?.answer || "No answer available" %>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Navigation -->
-      <div class="navigation">
-        <button id="prev-card">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <span id="card-counter">1 of <%= flashcards.length %></span>
-        <button id="next-card">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-    </div>
-  </section>
-
   <!-- Flash Messages -->
   <% if (query.alert === 'success') { %>
     <div class="alert alert-success">
+      <div class="alert-content">
+        <i class="fas fa-check-circle"></i>
+        Card deleted successfully!
+      </div>
       <div class="close-button">
         <a href="/" class="close-btn">
           <i class="fas fa-times"></i>
         </a>
       </div>
-      Card deleted successfully!
     </div>
   <% } else if (query.alert === 'error') { %>
     <div class="alert alert-error">
+      <div class="alert-content">
+        <i class="fas fa-exclamation-circle"></i>
+        Failed to delete the card.
+      </div>
       <div class="close-button">
         <a href="/" class="close-btn">
           <i class="fas fa-times"></i>
         </a>
       </div>
-      Failed to delete the card.
     </div>
   <% } %>
 
@@ -59,7 +32,16 @@
   <section class="bottom-section">
     <!-- Deck List -->
     <div class="deck-list-container">
-      <h2>Your Deck</h2>
+      <!-- Header -->
+      <div class="deck-list-header">
+        <h2>Your Deck</h2>
+        <form method="GET" action="/flashcards/study" class="study-btn-form">
+          <button type="submit" class="study-btn">
+            <i class="fas fa-book"></i> Study Deck
+          </button>
+        </form>
+      </div>
+
       <ul class="deck-list" id="deck-list">
         <% flashcards.forEach(flashcard => { %>
         <li class="deck-list-card" data-id="<%= flashcard.id %>">
@@ -119,5 +101,5 @@
   </section>
 </div>
 
-<script src="/scripts/flipdeck.js"></script>
+<script src="/scripts/alerts.js"></script>
 <%- include('partials/footer') %>

@@ -1,6 +1,7 @@
 import express from "express";
 import {
   renderHomepage,
+  renderStudyPage,
   getFlashcardsAsJson,
   showAddFlashcardForm,
   createFlashcardHandler,
@@ -12,6 +13,7 @@ import {
 const router = express.Router();
 
 router.get("/", renderHomepage);
+router.get("/flashcards/study", renderStudyPage);
 router.get("/api/flashcards", getFlashcardsAsJson);
 router.get("/flashcards/new", showAddFlashcardForm);
 router.post("/flashcards", createFlashcardHandler);

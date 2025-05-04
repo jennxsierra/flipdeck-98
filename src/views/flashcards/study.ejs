@@ -1,0 +1,38 @@
+<%- include('../partials/meta') %>
+<%- include('../partials/header') %>
+
+  <!-- FlipDeck Section -->
+  <section class="flipdeck-section">
+    <div class="flip-deck">
+
+      <!-- Flashcard -->
+      <div class="flipdeck-card" id="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <p id="card-content">
+              <%= flashcards[0]?.prompt || "No cards available" %>
+            </p>
+          </div>
+          <div class="flip-card-back">
+            <p id="card-answer">
+              <%= flashcards[0]?.answer || "No answer available" %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="navigation">
+        <button id="prev-card">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <span id="card-counter">1 of <%= flashcards.length %></span>
+        <button id="next-card">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script src="/scripts/flipdeck.js"></script>
+<%- include('../partials/footer') %>

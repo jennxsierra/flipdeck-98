@@ -16,6 +16,15 @@ export const renderHomepage = async (req: Request, res: Response) => {
   }
 };
 
+export const renderStudyPage = async (_req: Request, res: Response) => {
+  try {
+    const flashcards = await getAllFlashcards();
+    res.render("flashcards/study", { flashcards });
+  } catch (error) {
+    res.status(500).render("error", { message: "Failed to load study page." });
+  }
+};
+
 export const getFlashcardsAsJson = async (_req: Request, res: Response) => {
   try {
     const flashcards = await getAllFlashcards();
