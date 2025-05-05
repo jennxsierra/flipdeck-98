@@ -1,0 +1,136 @@
+/* Form styles */
+.floating-card form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.floating-card .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacing-md);
+}
+
+.floating-card .form-group label {
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.floating-card .form-group input,
+.floating-card .form-group textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.floating-card textarea {
+  resize: vertical;
+  min-height: 100px;
+  max-height: 300px;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: var(--spacing-md);
+}
+
+/* Form Validation Styles */
+.char-count {
+  text-align: right;
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+.form-group.error input,
+.form-group.error textarea {
+  border: 2px solid #dc3545;
+  background-color: #fff8f8;
+}
+
+.error-message {
+  align-self: flex-start;
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Override default input border color on autofill */
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+/* Search Form */
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-form input {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+}
+
+.search-form button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-form button:hover {
+  background-color: var(--primary-dark);
+}
+
+.clear-search {
+  background-color: #cccccc;
+  color: #000;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-sm);
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clear-search:hover {
+  background-color: #9f9f9f;
+}
+
+.sort-options {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-options label {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.sort-options select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background-color: #fff;
+  cursor: pointer;
+}

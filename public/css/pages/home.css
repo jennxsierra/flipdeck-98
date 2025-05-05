@@ -1,0 +1,30 @@
+/* Home page specific styles */
+.deck-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.deck-list-header h2 {
+  margin: 0;
+}
+
+.study-btn-form {
+  margin-left: auto;
+}
+
+/* Search and Sort Section */
+.search-sort-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: #eeeeee;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.search-options {
+  margin-bottom: var(--spacing-sm);
+}

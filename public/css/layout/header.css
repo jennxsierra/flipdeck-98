@@ -1,0 +1,18 @@
+/* Navigation Bar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm);
+  background-color: var(--gray-bg);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.navbar .logo img {
+  height: 50px;
+}
+
+.navbar .welcome-message {
+  font-size: 1.5rem;
+  color: var(--primary-dark);
+}

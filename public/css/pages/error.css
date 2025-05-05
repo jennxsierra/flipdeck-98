@@ -1,0 +1,14 @@
+/* Error page specific styles */
+.error-page-container {
+  text-align: center;
+}
+
+.error-page-container h1 {
+  margin-bottom: var(--spacing-md);
+}
+
+.error-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}

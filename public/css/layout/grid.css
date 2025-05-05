@@ -1,0 +1,16 @@
+/* Main layout grid */
+.bottom-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* Media Queries for Responsive Layout */
+@media screen and (max-width: 768px) {
+  .bottom-section {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+}

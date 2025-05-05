@@ -1,0 +1,159 @@
+/* Card Container Styles */
+.deck-list-container,
+.right-sidebar-container {
+  border: 3px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md);
+  background-color: var(--light-bg);
+}
+
+/* Deck List Cards */
+.deck-list-card {
+  min-height: 150px;
+  height: auto;
+  font-size: 1rem;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr 20px 1fr;
+  gap: 0;
+  position: relative;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  padding: 0.5rem 0.5rem 2rem 1rem;
+  margin-bottom: var(--spacing-md);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.deck-list-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Top row for action buttons */
+.deck-list-card .actions {
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.deck-list-card .actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.deck-list-card .actions .edit-btn {
+  color: var(--text-dark);
+}
+
+.deck-list-card .actions .delete-btn {
+  color: #d9534f;
+}
+
+.deck-list-card .actions .edit-btn:hover {
+  color: #5b7ade;
+}
+
+.deck-list-card .actions .delete-btn:hover {
+  color: #bb0600;
+}
+
+.deck-list-card .actions i {
+  pointer-events: none;
+}
+
+/* Prompt column */
+.deck-list-card .prompt {
+  grid-column: 1 / 2;
+  text-align: left;
+  align-self: center;
+}
+
+/* Divider column */
+.deck-list-card .divider {
+  grid-column: 2 / 3;
+  background-color: #00316685;
+  width: 1px;
+  height: 100%;
+}
+
+/* Answer column */
+.deck-list-card .answer {
+  grid-column: 3 / 4;
+  text-align: left;
+  align-self: center;
+}
+
+/* Floating Card (Form Cards) */
+.floating-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  min-height: 600px;
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: var(--spacing-xl);
+  background-color: #ffffff;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: visible;
+}
+
+.floating-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* FlipDeck Card */
+.flipdeck-card {
+  perspective: 1000px;
+  width: 600px;
+  height: 400px;
+  margin-bottom: var(--spacing-md);
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.flipdeck-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: var(--border-radius-lg);
+  font-size: 1.8rem;
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+  overflow-y: auto;
+  word-wrap: break-word;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+#card-content {
+  margin: 20px;
+}

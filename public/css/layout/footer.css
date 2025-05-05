@@ -1,0 +1,27 @@
+/* Footer Section */
+.footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: var(--spacing-md);
+  background-color: var(--primary);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-content p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+.footer-content a {
+  color: #000;
+  text-decoration: none;
+}
