@@ -673,11 +673,10 @@ h2 {
 
 /* -------------------- Add and Edit Forms -------------------- */
 .floating-card {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 0fr 2fr;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
-  height: 600px;
+  min-height: 600px;
   max-width: 500px;
   margin: 2rem auto;
   padding: 2rem;
@@ -686,11 +685,18 @@ h2 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: visible;
 }
 
 .floating-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.floating-card form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .floating-card .form-group {
@@ -707,22 +713,25 @@ h2 {
 
 .floating-card .form-group input,
 .floating-card .form-group textarea {
-  flex: 1;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-bottom: 15px;
+  width: 100%;
 }
 
 .floating-card textarea {
-  resize: both;
+  resize: vertical;
+  min-height: 100px;
+  max-height: 300px;
 }
 
 .btn-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 5rem;
+  margin-top: auto;
+  padding-top: 1rem;
 }
 
 .submit-btn,

@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const response = await fetch("/api/flashcards");
     if (!response.ok) throw new Error("Failed to fetch flashcards");
-    flashcards = await response.json();
+    const data = await response.json();
+    flashcards = data.flashcards;
   } catch (error) {
     console.error("Error fetching flashcards:", error);
     cardContent.textContent = "Failed to load flashcards.";
@@ -143,7 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       fetch("/api/flashcards")
         .then((response) => response.json())
         .then((data) => {
-          flashcards = data;
+          flashcards = data.flashcards;
           currentCardIndex = 0;
           isFront = true;
           updateCardDisplay();
