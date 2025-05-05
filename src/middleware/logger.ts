@@ -53,7 +53,22 @@ const customFormat = [
 const logger = morgan(customFormat, {
   skip: (req: Request) => {
     // Skip logging for requests to static files with specific extensions
-    const skipExtensions = [".css", ".png", ".jpg", ".jpeg", ".gif", ".svg"];
+    const skipExtensions = [
+      ".css",
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".gif",
+      ".svg",
+      ".ico",
+    ];
+
+    // Skip favicon requests
+    if (req.url === "/favicon.ico" || req.url.includes("/favicon/")) {
+      return true;
+    }
+
+    // Skip other static file extensions
     return skipExtensions.some((ext) => req.url.endsWith(ext));
   },
 });
