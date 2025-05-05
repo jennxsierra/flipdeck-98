@@ -1,27 +1,51 @@
 <%- include('../partials/meta') %>
 <%- include('../partials/header') %>
 
-  <!-- FlipDeck Section -->
-  <section class="flipdeck-section">
-    <div class="flip-deck">
+<!-- FlipDeck Section -->
+<section class="flipdeck-section">
+  <div class="flip-deck">
+    <!-- Study timer -->
+    <div class="study-timer">
+      <div class="empty-space"></div>
+      <div class="timer-display">
+        <i class="fas fa-clock"></i> <span id="timer">00:00</span>
+      </div>
+      
+      <div class="timer-controls">
+        <button id="start-timer" class="timer-btn" title="Start timer">
+          <i class="fas fa-play"></i>
+        </button>
+        <button id="pause-timer" class="timer-btn" title="Pause timer">
+          <i class="fas fa-pause"></i>
+        </button>
+        <button id="reset-timer" class="timer-btn" title="Reset timer">
+          <i class="fas fa-undo"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Progress bar -->
+    <div class="progress-container">
+      <div class="progress-bar" id="study-progress"></div>
+    </div>
 
-      <!-- Flashcard -->
-      <div class="flipdeck-card" id="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <p id="card-content">
-              <%= flashcards[0]?.prompt || "No cards available" %>
-            </p>
-          </div>
-          <div class="flip-card-back">
-            <p id="card-answer">
-              <%= flashcards[0]?.answer || "No answer available" %>
-            </p>
-          </div>
+    <!-- Flashcard -->
+    <div class="flipdeck-card" id="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <p id="card-content">
+            <%= flashcards[0]?.prompt || "No cards available" %>
+          </p>
+        </div>
+        <div class="flip-card-back">
+          <p id="card-answer">
+            <%= flashcards[0]?.answer || "No answer available" %>
+          </p>
         </div>
       </div>
+    </div>
 
-      <!-- Navigation -->
+    <div class="card-footer">
+      <!-- Card controls -->
       <div class="navigation">
         <button id="prev-card">
           <i class="fas fa-chevron-left"></i>
@@ -31,8 +55,25 @@
           <i class="fas fa-chevron-right"></i>
         </button>
       </div>
-    </div>
-  </section>
 
-  <script src="/scripts/flipdeck.js"></script>
+      <!-- Shuffle actions -->
+      <button
+        id="shuffle-toggle"
+        class="shuffle-btn"
+        data-mode="sequential"
+        data-tooltip="Toggle shuffle mode"
+      >
+        <i class="fas fa-random"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="study-controls">
+  <a href="/" class="back-to-deck">
+    <i class="fas fa-arrow-left"></i> Back to Deck
+  </a>
+</div>
+
+<script src="/scripts/flipdeck.js"></script>
 <%- include('../partials/footer') %>
