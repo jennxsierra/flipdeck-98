@@ -30,6 +30,11 @@ app.set("views", "./src/views");
 // Routes
 app.use("/", flashcardRoutes);
 
+// 404 handler for undefined routes
+app.use((_req, res) => {
+  res.status(404).render("error", { message: "Page not found" });
+});
+
 // Start server
 const PORT = 3000;
 app.listen(PORT, () => {

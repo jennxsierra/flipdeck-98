@@ -793,6 +793,47 @@ textarea:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px white inset;
 }
 
+/* ------------------ Error Page ------------------ */
+.error-page-container {
+  text-align: center;
+}
+
+.error-page-container h1 {
+  margin-bottom: 1rem;
+}
+
+.error-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.back-home-btn {
+  background-color: #00509e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-home-btn:hover {
+  background-color: #003166;
+}
+
+.back-home-btn a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* ------------------ Footer Section ------------------ */
 .footer {
   position: relative;

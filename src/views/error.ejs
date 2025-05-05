@@ -1,6 +1,16 @@
 <%- include('partials/meta') %>
 <%- include('partials/header') %>
-<h1>Error</h1>
-<p><%= message %></p>
-<a href="/">Back to Home</a>
+
+<div class="floating-card error-page-container">
+  <h1><%= message === "Page not found" ? "404 - Page Not Found" : "Error" %></h1>
+  <p><%= message %></p>
+  <div class="error-btn-container">
+    <button type="button" class="back-home-btn">
+      <a href="/">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+    </button>
+  </div>
+</div>
+
 <%- include('partials/footer') %>
