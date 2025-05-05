@@ -3,15 +3,23 @@
 
 <div class="floating-card">
   <h1>Edit Card</h1>
-  <form method="POST" action="/flashcards/<%= flashcard.id %>?_method=PATCH">
-    <div class="form-group">
+  <form method="POST" action="/flashcards/<%= flashcard.id %>?_method=PATCH" id="flashcardForm" novalidate>
+    <div class="form-group <%= locals.errors && errors.prompt ? 'error' : '' %>">
       <label for="prompt">Prompt</label>
-      <textarea id="prompt" name="prompt" required><%= flashcard.prompt %></textarea>
+      <textarea id="prompt" name="prompt" required minlength="3" maxlength="500"><%= flashcard.prompt %></textarea>
+      <% if (locals.errors && errors.prompt) { %>
+        <span class="error-message"><%= errors.prompt %></span>
+      <% } %>
+      <small id="promptCharCount" class="char-count">0/500 characters</small>
     </div>
 
-    <div class="form-group">
+    <div class="form-group <%= locals.errors && errors.answer ? 'error' : '' %>">
       <label for="answer">Answer</label>
-      <textarea id="answer" name="answer" required><%= flashcard.answer %></textarea>
+      <textarea id="answer" name="answer" required minlength="3" maxlength="500"><%= flashcard.answer %></textarea>
+      <% if (locals.errors && errors.answer) { %>
+        <span class="error-message"><%= errors.answer %></span>
+      <% } %>
+      <small id="answerCharCount" class="char-count">0/500 characters</small>
     </div>
 
     <div class="btn-container">
@@ -23,4 +31,5 @@
   </form>
 </div>
 
+<script src="/scripts/formValidation.js"></script>
 <%- include('../partials/footer') %>

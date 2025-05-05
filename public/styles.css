@@ -763,6 +763,36 @@ h2 {
   background-color: #9f9f9f;
 }
 
+/* Form Validation Styles */
+.char-count {
+  text-align: right;
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+.form-group.error input,
+.form-group.error textarea {
+  border: 2px solid #dc3545;
+  background-color: #fff8f8;
+}
+
+.error-message {
+  align-self: flex-start;
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Override default input border color on autofill */
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
 /* ------------------ Footer Section ------------------ */
 .footer {
   position: relative;

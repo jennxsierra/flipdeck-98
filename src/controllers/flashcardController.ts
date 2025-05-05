@@ -85,6 +85,31 @@ export const showAddFlashcardForm = (_req: Request, res: Response) => {
 
 export const createFlashcardHandler = async (req: Request, res: Response) => {
   const { prompt, answer } = req.body;
+  const errors: { [key: string]: string } = {};
+
+  // Validate prompt
+  if (!prompt || prompt.trim().length < 3) {
+    errors.prompt = "Prompt must be at least 3 characters.";
+  } else if (prompt.length > 500) {
+    errors.prompt = "Prompt cannot exceed 500 characters.";
+  }
+
+  // Validate answer
+  if (!answer || answer.trim().length < 3) {
+    errors.answer = "Answer must be at least 3 characters.";
+  } else if (answer.length > 500) {
+    errors.answer = "Answer cannot exceed 500 characters.";
+  }
+
+  // If there are errors, re-render the form with error messages
+  if (Object.keys(errors).length > 0) {
+    return res.render("flashcards/new", {
+      flashcard: { prompt, answer },
+      errors,
+    });
+  }
+
+  // If validation passes, create the flashcard
   await createFlashcard({ prompt, answer });
   res.redirect("/");
 };
@@ -109,7 +134,40 @@ export const showEditFlashcardForm = async (req: Request, res: Response) => {
 
 export const updateFlashcardHandler = async (req: Request, res: Response) => {
   const { prompt, answer } = req.body;
-  await updateFlashcard(Number(req.params.id), { prompt, answer });
+  const id = Number(req.params.id);
+  const errors: { [key: string]: string } = {};
+
+  // Validate prompt
+  if (!prompt || prompt.trim().length < 3) {
+    errors.prompt = "Prompt must be at least 3 characters.";
+  } else if (prompt.length > 500) {
+    errors.prompt = "Prompt cannot exceed 500 characters.";
+  }
+
+  // Validate answer
+  if (!answer || answer.trim().length < 1) {
+    errors.answer = "Answer must be at least 1 character.";
+  } else if (answer.length > 500) {
+    errors.answer = "Answer cannot exceed 500 characters.";
+  }
+
+  // If there are errors, re-render the form with error messages
+  if (Object.keys(errors).length > 0) {
+    try {
+      const flashcard = await getFlashcardById(id);
+      return res.render("flashcards/edit", {
+        flashcard: { ...flashcard, prompt, answer, id },
+        errors,
+      });
+    } catch (error) {
+      return res.status(404).render("error", {
+        message: "Failed to retrieve flashcard",
+      });
+    }
+  }
+
+  // If validation passes, update the flashcard
+  await updateFlashcard(id, { prompt, answer });
   res.redirect("/");
 };
 
