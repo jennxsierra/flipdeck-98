@@ -65,6 +65,39 @@
         </li>
         <% }) %>
       </ul>
+
+      <!-- Pagination -->
+      <% if (pagination && pagination.totalPages > 1) { %>
+        <div class="pagination">
+          <% if (pagination.hasPrevPage) { %>
+            <a href="/?page=<%= pagination.currentPage - 1 %><%= query.search ? '&search=' + query.search : '' %><%= query.sort ? '&sort=' + query.sort : '' %>" class="page-link">
+              <i class="fas fa-chevron-left"></i>
+            </a>
+          <% } else { %>
+            <span class="page-link disabled">
+              <i class="fas fa-chevron-left"></i>
+            </span>
+          <% } %>
+          
+          <% for(let i = 1; i <= pagination.totalPages; i++) { %>
+            <% if (i === pagination.currentPage) { %>
+              <span class="page-link active"><%= i %></span>
+            <% } else { %>
+              <a href="/?page=<%= i %><%= query.search ? '&search=' + query.search : '' %><%= query.sort ? '&sort=' + query.sort : '' %>" class="page-link"><%= i %></a>
+            <% } %>
+          <% } %>
+          
+          <% if (pagination.hasNextPage) { %>
+            <a href="/?page=<%= pagination.currentPage + 1 %><%= query.search ? '&search=' + query.search : '' %><%= query.sort ? '&sort=' + query.sort : '' %>" class="page-link">
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          <% } else { %>
+            <span class="page-link disabled">
+              <i class="fas fa-chevron-right"></i>
+            </span>
+          <% } %>
+        </div>
+      <% } %>
     </div>
 
     <!-- Right Sidebar -->
@@ -82,21 +115,31 @@
       <h2>Search & Sort</h2>
       <div class="search-sort-container">
         <div class="search-options">
-          <form class="search-form">
-            <input type="text" placeholder="Search flashcards..." />
+          <form class="search-form" method="GET" action="/">
+            <input type="text" name="search" placeholder="Search flashcards..." value="<%= query.search || '' %>" />
+            <% if (query.sort) { %>
+              <input type="hidden" name="sort" value="<%= query.sort %>" />
+            <% } %>
             <button type="submit">Search</button>
+            <% if (query.search) { %>
+              <a href="<%= query.sort ? '/?sort=' + query.sort : '/' %>" class="clear-search">Clear</a>
+            <% } %>
           </form>
         </div>
 
         <div class="sort-options">
-          <label for="sort-dropdown">Sort by:</label>
-          <select id="sort-dropdown" name="sort">
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
-          </select>
+          <form id="sort-form" method="GET" action="/">
+            <!-- Preserve search parameter if it exists -->
+            <% if (query.search) { %>
+              <input type="hidden" name="search" value="<%= query.search %>" />
+            <% } %>
+            <label for="sort-dropdown">Sort by:</label>
+            <select id="sort-dropdown" name="sort" onchange="document.getElementById('sort-form').submit()">
+              <option value="newest" <%= query.sort === 'newest' || !query.sort ? 'selected' : '' %>>Newest</option>
+              <option value="oldest" <%= query.sort === 'oldest' ? 'selected' : '' %>>Oldest</option>
+            </select>
+          </form>
         </div>
-      </div>
-     </div>
 
   </section>
 </div>

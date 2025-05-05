@@ -8,14 +8,59 @@ export interface Flashcard {
   updated_at?: Date;
 }
 
-export const getAllFlashcards = async (): Promise<Flashcard[]> => {
-  const result = await query(
-    "SELECT * FROM flashcards ORDER BY created_at DESC"
-  );
-  if (result.rows.length === 0) {
-    throw new Error("No flashcards found in the database.");
+interface FlashcardQueryOptions {
+  searchTerm?: string;
+  sortOrder?: "asc" | "desc";
+  limit?: number;
+  offset?: number;
+}
+
+export const getAllFlashcards = async (
+  options: FlashcardQueryOptions = {}
+): Promise<{ flashcards: Flashcard[]; totalCount: number }> => {
+  try {
+    const { searchTerm, sortOrder = "desc", limit, offset } = options;
+
+    // Build the base query for filtering
+    let whereClause = "";
+    const queryParams: any[] = [];
+
+    if (searchTerm) {
+      whereClause = "WHERE prompt ILIKE $1 OR answer ILIKE $1";
+      queryParams.push(`%${searchTerm}%`);
+    }
+
+    // Get the total count of matching flashcards
+    const countResult = await query(
+      `SELECT COUNT(*) FROM flashcards ${whereClause}`,
+      searchTerm ? queryParams : []
+    );
+    const totalCount = parseInt(countResult.rows[0].count);
+
+    // Build the query for fetching flashcards with pagination
+    let queryText = `SELECT * FROM flashcards ${whereClause}`;
+    queryText += ` ORDER BY created_at ${sortOrder === "asc" ? "ASC" : "DESC"}`;
+
+    // Add pagination if limit is specified
+    if (limit !== undefined && offset !== undefined) {
+      queryText +=
+        " LIMIT $" +
+        (queryParams.length + 1) +
+        " OFFSET $" +
+        (queryParams.length + 2);
+      queryParams.push(limit, offset);
+    }
+
+    const result = await query(queryText, queryParams);
+
+    return {
+      flashcards: result.rows,
+      totalCount,
+    };
+  } catch (error) {
+    console.error("Database query error:", error);
+    return { flashcards: [], totalCount: 0 };
   }
-  return result.rows;
 };
 
 export const getFlashcardById = async (

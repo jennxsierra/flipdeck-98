@@ -9,26 +9,71 @@ import {
 
 export const renderHomepage = async (req: Request, res: Response) => {
   try {
-    const flashcards = await getAllFlashcards();
-    res.render("index", { flashcards, query: req.query }); // Pass req.query to the template
+    const searchTerm = req.query.search as string | undefined;
+    const sortOption = req.query.sort as string | undefined;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = 5; // Cards per page
+    const offset = (page - 1) * limit;
+
+    // Get flashcards with search, sort, and pagination options
+    const { flashcards, totalCount } = await getAllFlashcards({
+      searchTerm,
+      sortOrder: sortOption === "oldest" ? "asc" : "desc",
+      limit,
+      offset,
+    });
+
+    // Calculate pagination info
+    const totalPages = Math.ceil(totalCount / limit);
+
+    res.render("index", {
+      flashcards,
+      query: req.query,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1,
+      },
+    });
   } catch (error) {
+    console.error("Error loading homepage:", error);
     res.status(500).render("error", { message: "Failed to load homepage." });
   }
 };
 
 export const renderStudyPage = async (_req: Request, res: Response) => {
   try {
-    const flashcards = await getAllFlashcards();
+    const { flashcards } = await getAllFlashcards();
     res.render("flashcards/study", { flashcards });
   } catch (error) {
     res.status(500).render("error", { message: "Failed to load study page." });
   }
 };
 
-export const getFlashcardsAsJson = async (_req: Request, res: Response) => {
+export const getFlashcardsAsJson = async (req: Request, res: Response) => {
   try {
-    const flashcards = await getAllFlashcards();
-    res.json(flashcards);
+    const searchTerm = req.query.search as string | undefined;
+    const sortOption = req.query.sort as string | undefined;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || undefined;
+    const offset = page && limit ? (page - 1) * limit : undefined;
+
+    const { flashcards, totalCount } = await getAllFlashcards({
+      searchTerm,
+      sortOrder: sortOption === "oldest" ? "asc" : "desc",
+      limit,
+      offset,
+    });
+
+    res.json({
+      flashcards,
+      pagination: {
+        currentPage: page,
+        totalPages: limit ? Math.ceil(totalCount / limit) : 1,
+        totalItems: totalCount,
+      },
+    });
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch flashcards" });
   }
