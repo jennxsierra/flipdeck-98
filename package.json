@@ -10,7 +10,8 @@
     "start": "node dist/app.js",
     "type-check": "tsc --noEmit",
     "start-server": "nodemon --watch src --exec tsx src/app.ts",
-    "dev": "npm-run-all --parallel type-check start-server"
+    "dev": "npm-run-all --parallel type-check start-server",
+    "setup": "node setup.js"
   },
   "repository": {
     "type": "git",

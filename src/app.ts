@@ -4,6 +4,10 @@ import logger from "./middleware/logger.js";
 import { methodOverrideMiddleware } from "./middleware/methodOverride.js";
 import { getLocalIpAddress } from "./utils/networkUtils.js";
 import flashcardRoutes from "./routes/flashcardRoutes.js";
+import dotenv from "dotenv";
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
 
