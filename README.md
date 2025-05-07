@@ -4,7 +4,7 @@
 
 # FlipDeck '98
 
-FlipDeck '98 is a nostalgic study tool that helps you create and review flashcards for effective learning. The application was developed using modern web technologies, including Node.js, Express, PostgreSQL, and EJS for server-side rendering as part of a semester project. You can view a presentation of the project [here](https://docs.google.com/presentation/).
+FlipDeck '98 is a nostalgic study tool that helps you create and review flashcards for effective learning. The application was developed using modern web technologies, including Node.js, Express, PostgreSQL, and EJS for server-side rendering as part of a semester project. You can view a presentation of the project [here](https://docs.google.com/presentation/d/1gWt_f4M2_RhS5lTGhnSGvObCFeCTu7fZcndTqeq81C8/edit?usp=sharing).
 
 ## Table of Contents
 
