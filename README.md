@@ -48,7 +48,19 @@ Follow these steps to get FlipDeck '98 running locally:
     cd flipdeck-98
     ```
 
-2. **Set up environment variables**
+2. **Install dependencies**
+
+    ```bash
+    npm install
+    ```
+
+    This will install all the required packages listed in `package.json`.
+
+  > [!NOTE]
+  >
+  > If you encounter any issues with the installation, ensure that you have the correct version of Node.js and npm installed.
+
+3. **Set up environment variables**
 
     ```bash
     cp .env.example .env
@@ -72,6 +84,12 @@ Follow these steps to get FlipDeck '98 running locally:
     - Set up the database schema and seed initial data
     - Install dependencies
     - Build the project
+
+  > [!WARNING]
+  >
+  > The setup script is made with the assumption that you are using a Linux-based system.
+  > It also assumes the existence of a PostgreSQL user with superuser privileges and an accompanying PostgreSQL database.
+  > If you encounter any issues, please check the script for any hardcoded paths or commands that may not work on your system.
 
 4. **Start the application**
 
