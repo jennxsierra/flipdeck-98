@@ -56,9 +56,9 @@ Follow these steps to get FlipDeck '98 running locally:
 
     Edit the `.env` file and update the values as needed, particularly the database credentials.
 
-    > [!WARNING]
-    >
-    > Ensure that any changes to the `.env` file are made before running the setup script.
+  > [!WARNING]
+  >
+  > Ensure that any changes to the `.env` file are made before running the setup script.
 
 3. **Run the setup script**
 
